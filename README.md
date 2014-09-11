@@ -32,3 +32,4 @@ To add this object to your project, follow these steps :
 
 
 You can see an example how to include Settings object into a project by going at this repository :
+https://github.com/RodgerLeblanc/Settings
