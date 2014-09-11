@@ -6,6 +6,7 @@ This was done to mimic QSettings but using a JSON file instead. Only the most co
 - allKeys()
 - contains()
 - clear()
+- fileName()
 - remove()
 - setValue()
 - sync()

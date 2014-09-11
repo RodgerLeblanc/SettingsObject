@@ -96,6 +96,11 @@ bool Settings::contains(const QString &key)
     return settings.contains(key);
 }
 
+QString Settings::fileName()
+{
+    return SETTINGS_FILE;
+}
+
 int Settings::remove(const QString &key)
 {
     // Removes all the items that have the key key from the settings file.

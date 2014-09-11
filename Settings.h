@@ -26,6 +26,7 @@ public:
     Q_INVOKABLE QStringList allKeys();
     Q_INVOKABLE bool contains(const QString &key);
     Q_INVOKABLE void clear();
+    Q_INVOKABLE QString fileName();
     Q_INVOKABLE int remove(const QString &key);
     Q_INVOKABLE void setValue(const QString &key, const QVariant &value);
     Q_INVOKABLE void sync();
