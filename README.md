@@ -16,11 +16,13 @@ The problem with QSettings is it will crash your headless part if the QSettings 
 To add this object to your project, follow these steps :
 1- Copy both Settings.cpp and Settings.h to your src folder
 2- In your applicationui.hpp, add those lines :
+
 	#include "Settings.h"
 	
 	private:
  	     Settings *settings;
 3- In your application.cpp, add those lines :
+
 	(in constructor)
 	settings = new Settings(this);
 		...
@@ -28,6 +30,7 @@ To add this object to your project, follow these steps :
 	qml->setContextProperty("_settings", settings);
 
 4- In your PRO file :
+
 	LIBS += -lbbdata
 
 
