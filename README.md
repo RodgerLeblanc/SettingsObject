@@ -1,4 +1,4 @@
-Settings (object)
+Settings (object) (intermediate)
 --------------
 Settings object can be imported into a project and accessed from QML (Q_INVOKABLE) and c++ (exactly the same way as QSettings, except that I recommend using a pointer to refer to this object instead of calling it directly, but this is not mandatory).
 
