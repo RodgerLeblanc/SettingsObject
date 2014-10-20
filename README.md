@@ -39,3 +39,10 @@ To add this object to your project, follow these steps :
 
 You can see an example how to include Settings object into a project by going at this repository :
 https://github.com/RodgerLeblanc/Settings
+
+
+LICENSE
+--------------
+This code is licensed under the Apache License version 2.0:
+
+http://www.apache.org/licenses/LICENSE-2.0
