@@ -27,7 +27,7 @@ To add this object to your project, follow these steps :
 3- In your application.cpp, add those lines :
 
 	(in constructor)
-	settings = new Settings(this);
+	settings = Settings::instance(this);
 		...
 	QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
 	qml->setContextProperty("_settings", settings);

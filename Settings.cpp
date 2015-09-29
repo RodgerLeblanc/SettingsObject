@@ -34,7 +34,8 @@
  *
  */
 
-#include "Settings.h"
+#include "src/Settings/Settings.h"
+#include <QDebug>
 #include <QFile>
 
 Settings::Settings(QObject *_parent)
@@ -50,6 +51,8 @@ Settings::Settings(QObject *_parent)
     if (!jsonFile.exists())
         save();
 
+    jsonFile.deleteLater();
+
     // Watcher for changes in the settings file.
     watcher = new QFileSystemWatcher(this);
 
@@ -63,17 +66,6 @@ Settings::~Settings()
 {
     // Save the settings file on exit.
     save();
-}
-
-void Settings::settingsChanged(const QString & path)
-{
-    // Avoid console warning as this variable is not used.
-    Q_UNUSED(path);
-
-    // Load the settings file because another instance have modified the file (headless or UI).
-    sync();
-
-    qDebug() << "UI : Settings file have changed and is now updated";
 }
 
 QStringList Settings::allKeys()
@@ -115,14 +107,22 @@ void Settings::save()
     jda.save(QVariant(settings), SETTINGS_FILE);
 }
 
+void Settings::settingsChanged(QString path) {
+    qDebug() << "UI -- Settings::settingsChanged()";
+    Q_UNUSED(path);
+
+    sync();
+}
+
 void Settings::setValue(const QString &key, const QVariant &value)
 {
     // Inserts a new item with the key key and a value of value.
     // If there is already an item with the key key, that item's value is
     // replaced with value.
 
-    qDebug() << "Settings::setValue ->" << key << ":" << value;
+    qDebug() << "UI - Settings::setValue ->" << key << ":" << value;
 
+    settings.remove(key);
     settings.insert(key, value);
     save();
 }
@@ -146,8 +146,8 @@ QVariant Settings::value(const QString &key, const QVariant &defaultValue)
         return QVariant();
 
     if (settings.contains(key)) {
-        qDebug() << "Settings::value ->" << key << ":" << settings.value(key);
-        return settings.value(key);
+//        qDebug() << "UI - Settings::value ->" << key << ":" << settings.value(key);
+        return settings.value(key, defaultValue);
     }
     else
         return defaultValue;

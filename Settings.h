@@ -10,8 +10,8 @@
 
 #include <QObject>
 #include <bb/data/JsonDataAccess>
-#include <QFileSystemWatcher>
 #include <QStringList>
+#include <QFileSystemWatcher>
 
 #define SETTINGS_FILE "data/settings.json"
 #define SETTINGS_ERROR "ERROR IN KEY NAME"
@@ -20,8 +20,14 @@ class Settings : public QObject
 {
     Q_OBJECT
 public:
-    Settings(QObject *_parent = 0);
-    virtual ~Settings();
+    static Settings *instance(QObject *_parent = 0) {
+        static Settings *instance;
+
+        if (!instance)
+            instance = new Settings(_parent);
+
+        return instance;
+    }
 
     Q_INVOKABLE QStringList allKeys();
     Q_INVOKABLE bool contains(const QString &key);
@@ -33,7 +39,7 @@ public:
     Q_INVOKABLE QVariant value(const QString &key, const QVariant &defaultValue = QVariant());
 
 private slots:
-    void settingsChanged(const QString & path);
+    void settingsChanged(QString);
 
 private:
     void save();
@@ -42,6 +48,10 @@ private:
 
     bb::data::JsonDataAccess jda;
     QVariantMap settings;
+
+protected:
+    Settings(QObject *_parent = 0);
+    virtual ~Settings();
 };
 
 #endif /* SETTINGS_H_ */
