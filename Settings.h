@@ -39,7 +39,7 @@ public:
     Q_INVOKABLE QVariant value(const QString &key, const QVariant &defaultValue = QVariant());
 
 private slots:
-    void settingsChanged(QString);
+    void settingsChanged(const QString& path);
 
 private:
     void save();
