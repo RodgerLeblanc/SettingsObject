@@ -107,7 +107,7 @@ void Settings::save()
     jda.save(QVariant(settings), SETTINGS_FILE);
 }
 
-void Settings::settingsChanged(QString path) {
+void Settings::settingsChanged(const QString& path) {
     qDebug() << "UI -- Settings::settingsChanged()";
     Q_UNUSED(path);
 
